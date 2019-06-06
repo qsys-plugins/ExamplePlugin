@@ -1,7 +1,7 @@
 PluginInfo = {
-    Name = "Base Plugin~Base Plugin",
+    Name = "Example~Plugin",
     Version = "0.0.0.0",
     Id = "<guid>",
-    Description = "Compiled from Visual Studio Code",
+    Description = "A Plugin Example",
     ShowDebug = true
 }
