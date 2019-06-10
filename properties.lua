@@ -30,5 +30,3 @@ table.insert(props,
       Value = false, -- This is the default 'state' of this boolean property
     }
   )
-
-  return props
