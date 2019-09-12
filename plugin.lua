@@ -25,7 +25,7 @@ end
 
 local pagenames = {"Mixer","Video Switcher"}
 
-function GetPages()
+function GetPages(props)
   pages = {}
 
   --[[ #include "pages.lua" ]]

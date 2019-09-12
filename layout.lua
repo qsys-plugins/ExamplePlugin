@@ -4,6 +4,7 @@ local inpnum = props["Inputs"].Value -- Sizes of certain elements can be dynamic
 local btn_style = props["Button Styles"].Value -- We will set button style based on what the user has selected in the Properties pane
 
 if CurrentPage == "Mixer" then -- Anything below here is only drawn on the "Mixer" page
+  layout["code"] = {Style = "Text",Position = {0,0},Size = {5,5}}
   for i=1,inpnum do
     -- Since Lua in Q-Sys compiles into C, there are some quirks to consider here
     -- If you only have a singular control ("Input 1"), the control exists just as that

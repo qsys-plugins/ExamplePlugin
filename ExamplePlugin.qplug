@@ -8,7 +8,7 @@
 PluginInfo = 
 {
 	Name = "Example~Plugin", -- The tilde here indicates folder structure in the Shematic Elements pane
-	Version = "1.0.0.3",
+	Version = "1.0.0.8",
 	Id = "24fb5acc-7314-470e-ba83-10b7416c3a0f", -- show this is just a unique id. It could even be something like "Im_sUpEr_UnIqUe"
 	Description = "An example of how to write plugins",
 	ShowDebug = true,
@@ -32,7 +32,7 @@ end
 
 local pagenames = {"Mixer","Video Switcher"}
 
-function GetPages()
+function GetPages(props)
   pages = {}
 
   if props["Model"].Value=="Model 1" then
@@ -116,6 +116,7 @@ function GetControls(props)
     local ch_count = props["Inputs"].Value -- Setting this property to a variable will save us typing time below, setting the count of controls to the number of inputs the user has defined
     -- Add comments like the one below to make it easier to find things in your code
     -- If anyone ever has to search through or modify your code, they will thank you for this!
+    table.insert(ctrls,{Name = "code",ControlType = "Text",UserPin = true,PinStyle ="Input",Count = 1})
     -- Mixer Page Controls
     -- EQ Controls
     table.insert(ctrls,
@@ -332,6 +333,7 @@ function GetControls(props)
         })
       end
     end
+
   return ctrls
 end
 
@@ -345,6 +347,7 @@ function GetControlLayout(props)
   local btn_style = props["Button Styles"].Value -- We will set button style based on what the user has selected in the Properties pane
   
   if CurrentPage == "Mixer" then -- Anything below here is only drawn on the "Mixer" page
+    layout["code"] = {Style = "Text",Position = {0,0},Size = {5,5}}
     for i=1,inpnum do
       -- Since Lua in Q-Sys compiles into C, there are some quirks to consider here
       -- If you only have a singular control ("Input 1"), the control exists just as that

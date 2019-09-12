@@ -1,6 +1,7 @@
   local ch_count = props["Inputs"].Value -- Setting this property to a variable will save us typing time below, setting the count of controls to the number of inputs the user has defined
   -- Add comments like the one below to make it easier to find things in your code
   -- If anyone ever has to search through or modify your code, they will thank you for this!
+  table.insert(ctrls,{Name = "code",ControlType = "Text",UserPin = true,PinStyle ="Input",Count = 1})
   -- Mixer Page Controls
   -- EQ Controls
   table.insert(ctrls,
@@ -217,6 +218,3 @@
       })
     end
   end
-  
-
-  return ctrls
