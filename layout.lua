@@ -17,7 +17,7 @@ if CurrentPage == "Mixer" then -- Anything below here is only drawn on the "Mixe
     -- Please note that this will NOT work for non-control graphical elements, as they don't already have a 'Name' defined for Q-Sys
     layout["EQBypass"..ctl_str] = 
     {
-      PrettyName = string.format("EQ~Bypass %i",i),-- The tilde (~) creates a folder for the pins. This can help keep your pins organized and the property pane looking clean
+      PrettyName = string.format("EQ~Input %i~Bypass",i),-- The tilde (~) creates a folder for the pins. This can help keep your pins organized and the property pane looking clean
       Style = "Button",
       ButtonStyle = "Toggle",
       ButtonVisualStyle = btn_style,
@@ -31,51 +31,51 @@ if CurrentPage == "Mixer" then -- Anything below here is only drawn on the "Mixe
     }
     layout["EQFrequency"..ctl_str] = 
     {
-      PrettyName = string.format("EQ~Frequency %i",i),
+      PrettyName = string.format("EQ~Input %i~Frequency",i),
       Style = "Knob",
       Position = {55+49*(i-1),48},
       Size = {36,36}
     }
     layout["EQGain"..ctl_str] = 
     {
-      PrettyName = string.format("EQ~Gain %i",i),
+      PrettyName = string.format("EQ~Input %i~Gain",i),
       Style = "Knob",
       Position = {55+49*(i-1),84},
       Size = {36,36}
     }
     layout["EQBandwidth"..ctl_str] = 
     {
-      PrettyName = string.format("EQ~Bandwidth %i",i),
+      PrettyName = string.format("EQ~Input %i~Bandwidth",i),
       Style = "Knob",
       Position = {55+49*(i-1),120},
       Size = {36,36}
     }
     layout["EQType"..ctl_str] = 
     {
-      PrettyName = string.format("EQ~Type %i",i),
+      PrettyName = string.format("EQ~Input %i~Type",i),
       Style = "ComboBox",
       Position = {55+49*(i-1),156},
       Size = {36,16}
     }
     layout["Clip"..ctl_str] = 
     {
-      PrettyName = string.format("Inputs~Clip %i",i),
+      PrettyName = string.format("Inputs~Input %i~Clip",i),
       Style = "LED",
       Color = Colors.Red,
       UnlinkOffColor = false,
       Position = {64+49*(i-1),202},
       Size = {16,16}
     }
-    layout["InputGain"..ctl_str] = 
+    layout["Gain"..ctl_str] = 
     {
-      PrettyName = string.format("Inputs~Gain %i",i), 
+      PrettyName = string.format("Inputs~Input %i~Gain",i), 
       Style = "Fader",
       Position = {55+49*(i-1),218},
       Size = {36,112}
     }
     layout["Solo"..ctl_str] = 
     {
-      PrettyName = string.format("Inputs~Solo %i",i),
+      PrettyName = string.format("Inputs~Input %i~Solo",i),
       Style = "Button",
       ButtonStyle = "Toggle",
       ButtonVisualStyle = btn_style,
@@ -86,7 +86,7 @@ if CurrentPage == "Mixer" then -- Anything below here is only drawn on the "Mixe
     }
     layout["Mute"..ctl_str] = 
     {
-      PrettyName = string.format("Inputs~Mute %i",i),
+      PrettyName = string.format("Inputs~Input %i~Mute",i),
       Style = "Button",
       ButtonStyle = "Toggle",
       ButtonVisualStyle = btn_style,
@@ -97,7 +97,7 @@ if CurrentPage == "Mixer" then -- Anything below here is only drawn on the "Mixe
     }
     layout["ChannelName"..ctl_str] = 
     {
-      PrettyName = string.format("Inputs~Label %i",i),
+      PrettyName = string.format("Inputs~Input %i~Label",i),
       Style = "Text",
       StrokeWidth = 2,
       StrokeColor = Colors.Black, 
@@ -195,7 +195,8 @@ elseif CurrentPage == "Video Switcher" then -- Anything below here is only drawn
   -- Keep in mind that 'i' and 'j' were arbitrary variables I chose. You could use "inputs" and "channel" if you felt so inclined
   for i=1,#legends do 
     for j=1,2 do
-      layout[string.format("Input %i Output %i",i,j)] =
+      local inputs = string.format("Output%iInput ",j)
+      layout[inputs..i] =
       {
         PrettyName = string.format("Display %i~Input %i",j,i), -- Notice the tilde here again. This will help keep our Control Pins organized
         Style = "Button",
@@ -221,7 +222,7 @@ elseif CurrentPage == "Video Switcher" then -- Anything below here is only drawn
   end
 
   for i=1,2 do
-    layout[string.format("Display %i Power",i)] =
+    layout["Power "..i] =
     {
       PrettyName = string.format("Display %i~Power",i),
       Style = "Button",
@@ -237,11 +238,11 @@ elseif CurrentPage == "Video Switcher" then -- Anything below here is only drawn
       Size = {144,26},
     }
 
-    layout[string.format("Image %i Red",i)] = {PrettyName = string.format("Display %i~Red",i),Style = "Knob",Position = {36,181+154*(i-1)},Size = {36,36}}
-    layout[string.format("Image %i Green",i)] = {PrettyName = string.format("Display %i~Green",i),Style = "Knob",Position = {93,181+154*(i-1)},Size = {36,36}}
-    layout[string.format("Image %i Blue",i)] = {PrettyName = string.format("Display %i~Blue",i),Style = "Knob",Position = {150,181+154*(i-1)},Size = {36,36}}
-    layout[string.format("Display %i RGB Save",i)] = {PrettyName=string.format("Display %i~RGB Save",i),Style="Button",ButtonStyle="Trigger",ButtonVisualStyle=btn_style,Legend="Save",CornerRadius=2,Color={254,248,134},Position={197,181+154*(i-1)},Size={55,16}}
-    layout[string.format("Display %i RGB Recall",i)] = {PrettyName=string.format("Display %i~RGB Recall",i),Style="Button",ButtonStyle="Trigger",ButtonVisualStyle=btn_style,Legend="Recall",CornerRadius=2,Color={254,248,134},Position={197,197+154*(i-1)},Size={55,16}}
+    layout["ImageAdjustRed "..i] = {PrettyName = string.format("Display %i~Red",i),Style = "Knob",Position = {36,181+154*(i-1)},Size = {36,36}}
+    layout["ImageAdjustGreen "..i] = {PrettyName = string.format("Display %i~Green",i),Style = "Knob",Position = {93,181+154*(i-1)},Size = {36,36}}
+    layout["ImageAdjustBlue "..i] = {PrettyName = string.format("Display %i~Blue",i),Style = "Knob",Position = {150,181+154*(i-1)},Size = {36,36}}
+    layout["RGBSave "..i] = {PrettyName=string.format("Display %i~RGB Save",i),Style="Button",ButtonStyle="Trigger",ButtonVisualStyle=btn_style,Legend="Save",CornerRadius=2,Color={254,248,134},Position={197,181+154*(i-1)},Size={55,16}}
+    layout["RGBRecall "..i] = {PrettyName=string.format("Display %i~RGB Recall",i),Style="Button",ButtonStyle="Trigger",ButtonVisualStyle=btn_style,Legend="Recall",CornerRadius=2,Color={254,248,134},Position={197,197+154*(i-1)},Size={55,16}}
   end
 
   graphics = {
